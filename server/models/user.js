@@ -33,7 +33,11 @@ var UserSchema = new mongoose.Schema({
       token:{
          type:String
       }
-   }]
+    }]
+   // comment:{
+   //    type:Schema.Types.ObjectID,
+   //    ref: 'Review'
+   // }
    //comment
 });
 

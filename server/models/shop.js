@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 var ShopSchema = new mongoose.Schema({
    address:{
@@ -11,13 +12,13 @@ var ShopSchema = new mongoose.Schema({
          required:true,
       },
       zip:{
-         type:Number
+         type:Number,
          required:true
       }
    },
    phone:{
       type:Number,
-      unique:true
+      unique:true,
       required:true
    },
    description:{
@@ -35,7 +36,7 @@ var ShopSchema = new mongoose.Schema({
    timeC:{
       type:Number,
       required:true
-   }
+   },
    costL:{
       type:Number,
       required:true
@@ -48,6 +49,10 @@ var ShopSchema = new mongoose.Schema({
       type:String,
       required:true
    },
+   comments:[{
+      type: Schema.Types.ObjectId,
+      ref: 'Review'
+   }]
    //comment
    //add rating
    //use mutler for images

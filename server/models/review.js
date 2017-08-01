@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+const Schema = mongoose.Schema;
 var ReviewSchema = new mongoose.Schema({
    Comment:{
       type:String
@@ -13,6 +14,10 @@ var ReviewSchema = new mongoose.Schema({
    },
    date:{
       type:String
+   },
+   user:{
+      type:Schema.types.ObjectId,
+      ref:'User'
    }
    //shop
 });
