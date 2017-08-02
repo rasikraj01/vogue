@@ -17,17 +17,17 @@ app.get('/',(req, res) => {
    res.send('testing');
 });
 app.post('/user', UserController.createUser );
-/*
+
 //SHOP ROUTES
 //create
 app.post('/shop', ShopController.createShop);
 //remove
 app.delete('/shop/:id', ShopController.deleteShop);
 //update
-app.patch('/shop/:id', ShopController.updateShop);
+//app.patch('/shop/:id', ShopController.updateShop);
 //delete
-app.get('shop/:id', ShopController.getShop);
-*/
+app.get('shops/:id', ShopController.getShop);
+
 app.listen(PORT, () => {
    console.log(`Sever running on PORT ${PORT}`);
 });
