@@ -11,12 +11,22 @@ const PORT = 5000;
 
 
 app.use(bodyParser.json());
+//HOME
+app.get('/',(req, res) => {
+   res.send('testing home');
+});
 
 //USER ROUTES
-app.get('/',(req, res) => {
-   res.send('testing');
-});
+//create
 app.post('/user', UserController.createUser );
+//remove
+app.delete('/user/:id', UserController.deleteUser);
+//update
+app.patch('/user/:id', UserController.updateUser);
+//get
+app.get('/user/:id', UserController.getUser);
+
+//search routes ??
 
 //SHOP ROUTES
 //create

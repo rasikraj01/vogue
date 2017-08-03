@@ -8,5 +8,31 @@ module.exports = {
 
       user.save()
          .then((doc) => {res.send(doc);});
+   },
+   deleteUser(req, res) {
+      var id = req.params.id;
+
+      User.findOneAndRemove({
+         _id:id
+      }).then(() => {res.send('deleted user');})
+         .catch((e) => {res.status(400).send()});
+
+   },
+   getUser(req, res) {
+      var id = req.params.id;
+
+      User.findOne({
+         _id:id
+      }).then((doc) => {res.send(doc)})
+         .catch((e) => {res.status(400).send();});
+   },
+   updateUser(req, res) {
+      var id = req.params.id;
+      var body = _.pick(req.body , ['email', 'password'])
+      User.findOneAndUpdate({
+         _id:id
+      }, {$set: body}, {new: true})
+      .then((doc) => {res.send(doc)})
+      .catch((e) => {res.status(400).send()});
    }
 }
