@@ -12,6 +12,7 @@ var authenticate = (req, res, next) => {
     //modify the request
     req.user = user;
     req.token = token;
+    console.log('authenticated');
     next();
   }).catch((e) => {
     res.status(401).send();

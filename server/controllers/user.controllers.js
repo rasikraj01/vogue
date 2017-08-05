@@ -24,17 +24,13 @@ module.exports = {
 
    },
    getUser(req, res) {
-      res.send(req.user);
-      // User.findOne({
-      //    _id:id
-      // }).then((doc) => {res.send(doc)})
-      //    .catch((e) => {res.status(400).send();});
+      res.send(req.user._id);
    },
    updateUser(req, res) {
-      var id = req.params.id;
-      var body = _.pick(req.body , ['email', 'password'])
+      var id = req.user._id;
+      var body = _.pick(req.body , ['email'])
       User.findOneAndUpdate({
-         _id:id
+            _id: id
       }, {$set: body}, {new: true})
       .then((doc) => {res.send(doc)})
       .catch((e) => {res.status(400).send()});
@@ -49,5 +45,13 @@ module.exports = {
       }).catch((e) => {
         res.status(400).send();
       });
+   },
+   logoutUser(req, res) {
+      req.user.removeToken(req.token).then(() => {
+        res.send('logged out');
+      }, () => {
+        res.status(400).send();
+      });
+
    }
 }

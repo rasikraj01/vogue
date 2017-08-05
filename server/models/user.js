@@ -94,6 +94,7 @@ UserSchema.statics.findByToken = function (token){
       'tokens.access': 'auth'
    });
 };
+
 UserSchema.statics.findByCredentials = function (email, password) {
   var User = this;
 

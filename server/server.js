@@ -23,11 +23,16 @@ app.post('/user', UserController.createUser );
 //remove deactivate
 app.delete('/user/:id', UserController.deleteUser);
 //update
-app.patch('/user/:id', UserController.updateUser);
+app.patch('/user', authenticate, UserController.updateUser);
 //get
 app.get('/user/me', authenticate ,UserController.getUser);
 //login
 app.post('/user/login', UserController.loginUser);
+//logout
+app.delete('/user/logout/token', authenticate, UserController.logoutUser);
+
+
+
 //search routes ??
 //authentication
 //authorization
