@@ -51,7 +51,7 @@ UserSchema.methods.toJSON = function () {
    var user = this;
    var userObject = user.toObject();
 
-   return _.pick(userObject, ['_id', 'email']);
+   return _.pick(userObject, ['_id', 'email', 'type']);
 }
 
 //works on every user documents

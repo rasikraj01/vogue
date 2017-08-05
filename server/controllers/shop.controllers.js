@@ -4,16 +4,21 @@ const _ = require('lodash');
 module.exports = {
    createShop(req, res){
       var body = _.pick(req.body,['address.street','address.city', 'address.zip','phone', 'description', 'closed', 'timeO', 'timeC', 'costL', 'costU', 'type']);
+      body['_creator'] = req.user._id;
+      console.log(body);
+
       var shop = new Shop(body);
 
       shop.save()
          .then((doc) => {res.send(doc)});
+
    },
    deleteShop(req, res){
       var id = req.params.id;
       Shop.findOneAndRemove({
-         _id:id
-      }).then(() => {res.send('deleted')});
+         _id:id,
+         _creator:req.user._id
+      }).then(() => {res.send('deleted shop')});
    },
    getShop(req, res){
       var id = req.params.id;
@@ -34,7 +39,8 @@ module.exports = {
       var body = _.pick(req.body, ['address.street','address.city', 'address.zip','phone', 'description', 'closed', 'timeO', 'timeC', 'costL', 'costU', 'type']);
 
       Shop.findOneAndUpdate({
-         _id:id
+         _id:id,
+         _creator:req.user._id
       },{$set:body},{new:true})
       .then((doc) => {res.send({doc});})
       .catch((e) => {

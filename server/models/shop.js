@@ -56,7 +56,7 @@ var ShopSchema = new mongoose.Schema({
    _creator:{
       type: Schema.Types.ObjectId,
       ref:'user',
-      //required: true
+      required: true
    }
    //comment
    //add rating

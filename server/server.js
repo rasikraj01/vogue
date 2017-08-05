@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
+const {authorize} = require('./middleware/authorize');
 const {authenticate} = require('./middleware/authenticate');
 const {mongoose} = require('./db/mongoose');
 const UserController=require('./controllers/user.controllers');
@@ -34,17 +35,16 @@ app.delete('/user/logout/token', authenticate, UserController.logoutUser);
 
 
 //search routes ??
-//authentication
 //authorization
 
 //SHOP ROUTES
 //create
-app.post('/shop', ShopController.createShop);
+app.post('/shop', authenticate, authorize ,ShopController.createShop);
 //remove
-app.delete('/shop/:id', ShopController.deleteShop);
+app.delete('/shop/:id',authenticate, authorize ,ShopController.deleteShop);
 //update
-app.patch('/shop/:id', ShopController.updateShop);
-//delete
+app.patch('/shop/:id', authenticate , authorize ,ShopController.updateShop);
+//fetch
 app.get('/shop/:id', ShopController.getShop);
 
 app.listen(PORT, () => {
