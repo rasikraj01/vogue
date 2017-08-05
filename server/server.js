@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
+const {authenticate} = require('./middleware/authenticate');
 const {mongoose} = require('./db/mongoose');
 const UserController=require('./controllers/user.controllers');
 const ShopController=require('./controllers/shop.controllers');
@@ -19,13 +20,14 @@ app.get('/',(req, res) => {
 //USER ROUTES
 //create
 app.post('/user', UserController.createUser );
-//remove
+//remove deactivate
 app.delete('/user/:id', UserController.deleteUser);
 //update
 app.patch('/user/:id', UserController.updateUser);
 //get
-app.get('/user/:id', UserController.getUser);
-
+app.get('/user/me', authenticate ,UserController.getUser);
+//login
+app.post('/user/login', UserController.loginUser);
 //search routes ??
 //authentication
 //authorization

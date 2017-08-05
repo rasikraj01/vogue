@@ -24,12 +24,11 @@ module.exports = {
 
    },
    getUser(req, res) {
-      var id = req.params.id;
-
-      User.findOne({
-         _id:id
-      }).then((doc) => {res.send(doc)})
-         .catch((e) => {res.status(400).send();});
+      res.send(req.user);
+      // User.findOne({
+      //    _id:id
+      // }).then((doc) => {res.send(doc)})
+      //    .catch((e) => {res.status(400).send();});
    },
    updateUser(req, res) {
       var id = req.params.id;
@@ -39,5 +38,16 @@ module.exports = {
       }, {$set: body}, {new: true})
       .then((doc) => {res.send(doc)})
       .catch((e) => {res.status(400).send()});
+   },
+   loginUser(req, res) {
+      var body = _.pick(req.body, ['email', 'password']);
+
+      User.findByCredentials(body.email, body.password).then((user) => {
+        return user.generateAuthToken().then((token) => {
+          res.header('x-auth', token).send(user);
+        });
+      }).catch((e) => {
+        res.status(400).send();
+      });
    }
 }
