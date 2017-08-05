@@ -7,7 +7,12 @@ module.exports = {
       var user = new User(body);
 
       user.save()
-         .then((doc) => {res.send(doc);});
+         .then(() => {
+            return user.generateAuthToken();
+            //res.send(doc);
+         }).then((token) => {
+            res.header('x-auth', token).send(user);
+         });
    },
    deleteUser(req, res) {
       var id = req.params.id;

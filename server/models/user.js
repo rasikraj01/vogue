@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
+const bcryptjs = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const _ = require('lodash');
 
 var UserSchema = new mongoose.Schema({
    email:{
@@ -40,6 +43,38 @@ var UserSchema = new mongoose.Schema({
    // }
    //comment
 });
+
+
+//over riding toJSON so that is doesnt return the token values
+UserSchema.methods.toJSON = function () {
+   var user = this;
+   var userObject = user.toObject();
+
+   return _.pick(userObject, ['_id', 'email']);
+}
+
+//works on every user documents
+UserSchema.methods.generateAuthToken = function () {
+  var user = this;
+  var access = 'auth';
+  var token = jwt.sign({_id: user._id.toHexString(), access}, 'thisissecert').toString();
+
+  user.tokens.push({access, token});
+
+  return user.save().then(() => {
+    return token;
+  });
+};
+
+UserSchema.methods.removeToken = function (token) {
+  var user = this;
+
+  return user.update({
+    $pull: {
+      tokens: {token}
+    }
+  });
+};
 
 
 var User = mongoose.model('User',

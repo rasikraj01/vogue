@@ -52,7 +52,12 @@ var ShopSchema = new mongoose.Schema({
    comments:[{
       type: Schema.Types.ObjectId,
       ref: 'Review'
-   }]
+   }],
+   _creator:{
+      type: Schema.Types.ObjectId,
+      ref:'user',
+      //required: true
+   }
    //comment
    //add rating
    //use mutler for images

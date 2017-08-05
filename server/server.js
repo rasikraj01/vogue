@@ -27,6 +27,8 @@ app.patch('/user/:id', UserController.updateUser);
 app.get('/user/:id', UserController.getUser);
 
 //search routes ??
+//authentication
+//authorization
 
 //SHOP ROUTES
 //create
