@@ -61,6 +61,7 @@ var ShopSchema = new mongoose.Schema({
    }
    //comment
    //add rating
+   //add a name property
    //use mutler for images
 });
 

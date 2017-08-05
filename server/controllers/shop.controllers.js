@@ -47,8 +47,13 @@ module.exports = {
          res.status(400).send()
       });
    },
-   allShop(req, res){
-      Shop.find().then((doc) => {res.send(doc)});
+   allShops(req, res){
+      Shop.find()
+      .then((doc) => {res.send(doc)})
+      .catch(((e) => {
+         console.log('controller eerror');
+         res.status(404).send();
+      }));
    }
 }
 //  ['address', 'phone', 'description', ]

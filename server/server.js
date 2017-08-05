@@ -34,8 +34,9 @@ app.delete('/user/logout/token', authenticate, UserController.logoutUser);
 
 
 
-//search routes ??
-//authorization
+//search shops ??
+//locations ??
+
 
 //SHOP ROUTES
 //create
@@ -47,7 +48,7 @@ app.patch('/shop/:id', authenticate , authorize ,ShopController.updateShop);
 //fetch a single shop
 app.get('/shop/:id', ShopController.getShop);
 //fetch all shops
-//app.get('/shops/', ShopController.allShops);
+app.get('/shops/', ShopController.allShops);
 
 app.listen(PORT, () => {
    console.log(`Sever running on PORT ${PORT}`);
