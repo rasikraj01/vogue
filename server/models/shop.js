@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const _ = require('lodash');
 
 var ShopSchema = new mongoose.Schema({
    address:{
@@ -62,6 +63,14 @@ var ShopSchema = new mongoose.Schema({
    //add rating
    //use mutler for images
 });
+
+ShopSchema.methods.toJSON = function (){
+      var shop = this;
+      var shopObject = shop.toObject();
+
+      return _.pick(shopObject, ['_id','phone', 'type', 'description']);
+};
+
 
 var Shop = mongoose.model('Shop', ShopSchema);
 

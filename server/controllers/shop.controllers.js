@@ -46,6 +46,9 @@ module.exports = {
       .catch((e) => {
          res.status(400).send()
       });
+   },
+   allShop(req, res){
+      Shop.find().then((doc) => {res.send(doc)});
    }
 }
 //  ['address', 'phone', 'description', ]

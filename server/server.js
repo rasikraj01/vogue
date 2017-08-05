@@ -44,8 +44,10 @@ app.post('/shop', authenticate, authorize ,ShopController.createShop);
 app.delete('/shop/:id',authenticate, authorize ,ShopController.deleteShop);
 //update
 app.patch('/shop/:id', authenticate , authorize ,ShopController.updateShop);
-//fetch
+//fetch a single shop
 app.get('/shop/:id', ShopController.getShop);
+//fetch all shops
+//app.get('/shops/', ShopController.allShops);
 
 app.listen(PORT, () => {
    console.log(`Sever running on PORT ${PORT}`);

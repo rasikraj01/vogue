@@ -15,6 +15,7 @@ var authenticate = (req, res, next) => {
     console.log('authenticated');
     next();
   }).catch((e) => {
+     console.log('authentication error');
     res.status(401).send();
   });
 };

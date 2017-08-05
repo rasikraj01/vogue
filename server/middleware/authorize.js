@@ -5,6 +5,7 @@ var authorize = (req, res, next) => {
    if (type=="shop"){
       next();
    }else {
+      console.log('authorization error');
       res.status(401).send();
    }
 }
