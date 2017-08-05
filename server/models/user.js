@@ -83,7 +83,7 @@ UserSchema.statics.findByToken = function (token){
 
    try {
       decode = jwt.verify(token, 'thisissecert');
-      console.log(decode);
+      console.log(decode + 'verified token');
    } catch (e) {
       return Promise.reject();
    }

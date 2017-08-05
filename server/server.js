@@ -21,7 +21,7 @@ app.get('/',(req, res) => {
 //create
 app.post('/user', UserController.createUser );
 //remove deactivate
-app.delete('/user/:id', UserController.deleteUser);
+app.delete('/user', authenticate, UserController.deleteUser);
 //update
 app.patch('/user', authenticate, UserController.updateUser);
 //get
