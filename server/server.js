@@ -15,7 +15,7 @@ const PORT = 5000;
 app.use(bodyParser.json());
 //HOME
 app.get('/',(req, res) => {
-   res.send('testing home');
+   res.render('testing home');
 });
 
 //USER ROUTES
