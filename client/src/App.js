@@ -5,20 +5,23 @@ import axios from 'axios';
 
 class App extends Component {
   handleSubmit(e) {
-     e.preventDefault();
-     var  url = 'http://localhost:5000/user'
-      var body = JSON.stringify({email: this.refs.email.value,password: this.refs.password.value, type: this.refs.type.value})
-      axios.post(url, body).then((body) => {console.log(body);}).catch((e) => {console.log(e);});
+      e.preventDefault();
+      var  url = 'http://localhost:5000/user'
+      var body = {email: this.refs.email.value,password: this.refs.password.value, type: this.refs.type.value}
+      console.log(body);
+      const res = axios.post(url, body).then((body) => {console.log(body);}).catch((e) => {console.log(e);});
+      console.log(res);
   }
   handleClick(e) {
      e.preventDefault();
      var  url = 'http://localhost:5000/shops'
-      axios.get(url).then((shops) => {console.log(shops);});
+      axios.get(url).then((shops) => {console.log(shops.data);});
   }
   render() {
     return (
       <div className="App">
-        <form action="localhost:5000/users" method="POST" onSubmit={this.handleSubmit.bind(this)}>
+         <p>create user</p>
+        <form action="http://localhost:5000/user" method="POST" onSubmit={this.handleSubmit.bind(this)}>
            <input type="text" ref="email" placeholder="email"/>
            <input type="text" ref="password" placeholder="password"/>
            <input type="text" ref="type" placeholder="type"/>
