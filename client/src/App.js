@@ -23,7 +23,7 @@ class App extends Component {
          <p>create user</p>
         <form action="http://localhost:5000/user" method="POST" onSubmit={this.handleSubmit.bind(this)}>
            <input type="text" ref="email" placeholder="email"/>
-           <input type="text" ref="password" placeholder="password"/>
+           <input type="password" ref="password" placeholder="password"/>
            <input type="text" ref="type" placeholder="type"/>
            <button type="submit">submit</button>
         </form>
