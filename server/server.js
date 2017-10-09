@@ -1,12 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const fs = require('fs');
+
 
 const {authorize} = require('./middleware/authorize');
 const {authenticate} = require('./middleware/authenticate');
 const {mongoose} = require('./db/mongoose');
 const UserController=require('./controllers/user.controllers');
 const ShopController=require('./controllers/shop.controllers');
-
 
 const app = express();
 const PORT = 5000;
@@ -44,10 +45,10 @@ app.post('/user/login', UserController.loginUser);
 app.delete('/user/logout/token', authenticate, UserController.logoutUser);
 
 
-
+// user favourites shop
 //search shops ??
 //locations ??
-
+//commets and ratings
 
 //SHOP ROUTES
 //create
